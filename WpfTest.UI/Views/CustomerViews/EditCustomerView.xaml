@@ -1,0 +1,71 @@
+﻿<Window x:Class="WpfTest.UI.Views.CustomerViews.EditCustomerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTest.UI.Views.CustomerViews"
+        Icon="https://img.icons8.com/ultraviolet/40/000000/check-in-desk.png"
+        mc:Ignorable="d"
+        Title="Edit Customer" Height="340" Width="350">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Edit a Customer" 
+                   Margin="89,10,92,10" 
+                   TextAlignment="Center"
+                   FontSize="15" Grid.ColumnSpan="3"/>
+
+        <Label Grid.Column="0" Margin="20,19,30,20" Grid.Row="1">
+            FirstName:
+        </Label>
+        <TextBox x:Name="NameValueTextbox" Grid.ColumnSpan="2" 
+                 Text="{Binding EditCustomer.FirstName,UpdateSourceTrigger=PropertyChanged}" Margin="0,19,17,20" Grid.Row="1" Grid.Column="1" />
+
+        <Label Grid.Column="0" Margin="20,19,30,20" Grid.Row="2">
+            LastName:
+        </Label>
+        <TextBox x:Name="AddressValueTextbox" Grid.ColumnSpan="2" 
+                 Text="{Binding EditCustomer.LastName,UpdateSourceTrigger=PropertyChanged}" Margin="0,19,17,20" Grid.Row="2" Grid.Column="1" />
+        <Label Grid.Column="0" 
+               Margin="20,13,2,23" 
+               Grid.Row="3">
+            Choose Store:
+        </Label>
+        <ComboBox ItemsSource="{Binding Path=Stores}" 
+                  SelectedValue="{Binding Path=EditCustomer.StoreId}"
+                  DisplayMemberPath="Name"
+                  SelectedValuePath="StoreId" 
+                  Grid.ColumnSpan="2"
+                  Margin="0,14,14,23" 
+                  Grid.Row="3" Grid.Column="1">
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate >
+                    <VirtualizingStackPanel/>
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
+        </ComboBox>
+        <Button Background="LightBlue" Grid.Row="4" 
+                IsDefault="True" 
+                Command="{Binding EditCommand}" CommandParameter="{Binding ElementName=addPersonView}"
+                Margin="8,18,10,18" Grid.Column="1">
+            Save
+        </Button>
+        <Button Grid.Row="4" Grid.Column="2"  
+                IsCancel="True" Margin="6,18,7,18"
+                Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=addPersonView}">
+            Cancel
+        </Button>
+    </Grid>
+</Window>
